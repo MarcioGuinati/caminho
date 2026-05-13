@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Encontros • Caminho</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../css/home.css">
+    <link rel="stylesheet" href="../../css/style.css" />
+    <link rel="icon" type="image/x-icon" href="/img/favicon.png" />
+</head>
+<body>
+    <!-- App Header -->
+    <header class="app-header">
+      <div class="header-left">
+        <a href="./encontros.html" class="back-link">
+          <i class="fas fa-arrow-left"></i>
+        </a>
+        <div class="user-profile">
+          <div class="user-info-text">
+            <span class="user-name">Preencher Encontro</span>
+            <span class="user-role">Comunidade 5</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="main-container">
+        <div id="multiStepForm">
+            <form id="form">
+                <div class="home-logo" style="margin-top: 0;">
+                    <img src="https://s3-sa-east-1.amazonaws.com/loja2/502253fe6a1b3fa283a422fd46b0d7fb.jpg" alt="Logo" style="width: 80px; height: 80px;" />
+                </div>
+
+                <div class="form-group">
+                    <label for="encontro">Nome do Encontro</label>
+                    <input type="text" id="encontro" name="encontro" placeholder="Ex: Preparação para Pascoa" required />
+                </div>
+
+                <div class="form-group">
+                    <label for="data">Data</label>
+                    <input type="date" id="data" name="data" required />
+                </div>
+
+                <div class="form-group">
+                    <label for="participantes">Faltantes</label>
+                    <input type="text" id="participantes" name="participantes" placeholder="Nome dos que faltaram" required />
+                </div>
+
+                <button type="button" onclick="submitForm()">
+                    <i class="fas fa-save"></i> Salvar Dados
+                </button>
+            </form>
+        </div>
+    </main>
+
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+      <a href="../../index.html" class="nav-item">
+        <i class="fas fa-home"></i>
+        <span>Início</span>
+      </a>
+      <a href="../celebracoes/celebracoes.html" class="nav-item">
+        <i class="fas fa-church"></i>
+        <span>Celeb.</span>
+      </a>
+      <div class="nav-item nav-item-center">
+        <a href="../liturgia/liturgia.html" class="center-btn">
+          <i class="fas fa-bible"></i>
+        </a>
+      </div>
+      <a href="../convivencias/convivencias.html" class="nav-item">
+        <i class="fas fa-users"></i>
+        <span>Conviv.</span>
+      </a>
+      <a href="../ajuda/ajuda.html" class="nav-item">
+        <i class="fas fa-info-circle"></i>
+        <span>Ajuda</span>
+      </a>
+    </nav>
+
+    <script src="../../js/alerts.js"></script>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-app.js";
+        import {
+            getFirestore,
+            collection,
+            addDoc,
+            serverTimestamp,
+            Timestamp,
+        } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-firestore.js";
+
+        import firebaseConfig from '../../js/firebase-config.js';
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        window.submitForm = async function () {
+            const encontro = document.getElementById("encontro").value.trim();
+            const dataInput = document.getElementById("data");
+            const dataValue = dataInput.value;
+            const participantes = document.getElementById("participantes").value.trim();
+
+            if (!encontro || !dataValue || !participantes) {
+                Alerts.warning('Atenção', 'Por favor, preencha todos os campos corretamente.');
+                return;
+            }
+
+            Alerts.toast("Salvando...", "save");
+
+            try {
+                const dataTimestamp = Timestamp.fromDate(new Date(dataValue + 'T00:00:00'));
+                await addDoc(collection(db, "encontros"), {
+                    encontro,
+                    data: dataTimestamp,
+                    participantes,
+                    createdAt: serverTimestamp(),
+                });
+                Alerts.success('Sucesso!', 'Os dados do encontro foram salvos corretamente.');
+                document.getElementById("form").reset();
+                document.getElementById('data').value = new Date().toISOString().split('T')[0];
+            } catch (error) {
+                console.error("Erro ao salvar:", error);
+                Alerts.error('Erro ao Salvar', 'Não foi possível salvar os dados. Tente novamente mais tarde.');
+            }
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('data').value = new Date().toISOString().split('T')[0];
+        });
+    </script>
+</body>
+</html>

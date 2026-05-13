@@ -1,0 +1,338 @@
+:root {
+  --primary-color: #603813;
+  --secondary-color: #b29f94;
+  --accent-color: #ff9800;
+  --text-color: #2c3e50;
+  --white: #ffffff;
+  --light-gray: #f5f5f5;
+  --liturgy-white: #f8f8f8;
+  --liturgy-red: #a52a2a;
+  --liturgy-green: #2e7d32;
+  --liturgy-purple: #6a1b9a;
+  --liturgy-pink: #ad1457;
+  --liturgy-black: #333333;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Montserrat", sans-serif;
+}
+
+body {
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  min-height: 100vh;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.home {
+  display: flex;
+  justify-content: center;
+  margin: 25px 0;
+}
+
+.home a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  background-color: var(--secondary-color);
+  color: white;
+  border-radius: 10px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.home a:hover {
+  background-color: var(--primary-color);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.container {
+  background: white;
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 600px;
+  margin: 20px 0;
+}
+
+.logo {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.logo img {
+  max-width: 120px;
+  height: auto;
+  border-radius: 50%;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  text-align: center;
+  color: var(--primary-color);
+  margin-bottom: 20px;
+  font-size: 1.8em;
+  font-weight: 700;
+}
+
+h2 mark {
+  background: linear-gradient(
+    120deg,
+    var(--primary-color) 0%,
+    var(--secondary-color) 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  padding: 5px 10px;
+}
+
+h3,
+h4,
+h5 {
+  color: var(--primary-color);
+  margin-bottom: 10px;
+}
+
+h3 {
+  font-size: 1.3em;
+  font-weight: 600;
+}
+
+h4 {
+  font-size: 1.1em;
+  font-weight: 500;
+}
+
+h5 {
+  font-size: 1em;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 20px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--text-color);
+  font-weight: 500;
+  font-size: 0.9em;
+}
+
+select,
+.form-control {
+  width: 100%;
+  padding: 12px 15px;
+  border: 2px solid #e0e0e0;
+  border-radius: 10px;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  background-color: var(--white);
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 15px;
+}
+
+select:focus,
+.form-control:focus {
+  border-color: var(--primary-color);
+  outline: none;
+  box-shadow: 0 0 8px rgba(96, 56, 19, 0.2);
+}
+
+.button {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin: 25px 0;
+}
+
+button {
+  background: linear-gradient(
+    135deg,
+    var(--primary-color) 0%,
+    var(--secondary-color) 100%
+  );
+  color: white;
+  padding: 14px 20px;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+button:hover {
+  opacity: 0.9;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+button.secondary {
+  background: var(--light-gray);
+  color: var(--text-color);
+}
+
+.liturgy-header {
+  text-align: center;
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #eee;
+}
+
+.liturgy-title-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.liturgy-color {
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.8em;
+  font-weight: 600;
+  text-transform: uppercase;
+  display: inline-block;
+  margin-top: 5px;
+}
+
+.prayer-text,
+.reading-text {
+  background-color: var(--light-gray);
+  padding: 15px;
+  border-radius: 10px;
+  line-height: 1.6;
+  text-align: justify;
+}
+
+.antiphon {
+  background-color: var(--light-gray);
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.psalm {
+  background-color: #f0f7f0;
+  border-left: 4px solid var(--liturgy-green);
+}
+
+.gospel {
+  background-color: #f5f0e6;
+  border-left: 4px solid var(--accent-color);
+}
+
+.refrain {
+  font-weight: 600;
+  color: var(--liturgy-green);
+  margin: 10px 0;
+  font-style: italic;
+  display: block;
+}
+
+/* Cores litúrgicas */
+.color-branco {
+  background-color: var(--liturgy-white);
+  color: var(--text-color);
+  border: 1px solid #ddd;
+}
+
+.color-vermelho {
+  background-color: var(--liturgy-red);
+  color: var(--white);
+}
+
+.color-verde {
+  background-color: var(--liturgy-green);
+  color: var(--white);
+}
+
+.color-roxo {
+  background-color: var(--liturgy-purple);
+  color: var(--white);
+}
+
+.color-rosa {
+  background-color: var(--liturgy-pink);
+  color: var(--white);
+}
+
+.color-preto {
+  background-color: var(--liturgy-black);
+  color: var(--white);
+}
+.verse-number {
+  font-size: 0.7em;
+  vertical-align: super;
+  line-height: 0;
+  margin-right: 1px;
+  color: #ff0000;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 20px;
+  }
+
+  h2 {
+    font-size: 1.5em;
+  }
+
+  h3 {
+    font-size: 1.1em;
+  }
+
+  select,
+  .form-control {
+    padding: 10px 12px;
+    font-size: 15px;
+  }
+
+  button {
+    padding: 12px 15px;
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    padding: 10px;
+  }
+
+  .container {
+    padding: 15px;
+  }
+
+  .logo img {
+    max-width: 100px;
+  }
+
+  h2 {
+    font-size: 1.3em;
+  }
+
+  .button {
+    gap: 10px;
+  }
+}

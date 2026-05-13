@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Liturgia Diária • Caminho</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../css/home.css">
+    <link rel="stylesheet" href="../../css/style.css" />
+    <link rel="icon" type="image/x-icon" href="/img/favicon.png" />
+    <style>
+        .liturgy-card {
+            background: white;
+            border-radius: 24px;
+            padding: 25px;
+            box-shadow: var(--shadow-md);
+            margin-bottom: 25px;
+        }
+        .prayer-text {
+            background: var(--bg-color);
+            padding: 15px;
+            border-radius: 12px;
+            font-style: italic;
+            color: var(--primary-dark);
+            line-height: 1.6;
+        }
+        .liturgy-header {
+            border-bottom: 2px solid var(--bg-color);
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+        .liturgy-color {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+        .antiphon {
+            border-left: 4px solid var(--primary-color);
+            padding-left: 15px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- App Header -->
+    <header class="app-header">
+      <div class="header-left">
+        <a href="../../index.html" class="back-link">
+          <i class="fas fa-arrow-left"></i>
+        </a>
+        <div class="user-profile">
+          <div class="user-info-text">
+            <span class="user-name">Liturgia Diária</span>
+            <span class="user-role">Comunidade 5</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="main-container">
+        <section class="liturgy-card">
+            <div class="dashboard-grid" style="grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 20px;">
+                <div class="form-group">
+                    <label>Dia</label>
+                    <select id="day"></select>
+                </div>
+                <div class="form-group">
+                    <label>Mês</label>
+                    <select id="month">
+                        <option value="01">Janeiro</option>
+                        <option value="02">Fevereiro</option>
+                        <option value="03">Março</option>
+                        <option value="04">Abril</option>
+                        <option value="05">Maio</option>
+                        <option value="06">Junho</option>
+                        <option value="07">Julho</option>
+                        <option value="08">Agosto</option>
+                        <option value="09">Setembro</option>
+                        <option value="10">Outubro</option>
+                        <option value="11">Novembro</option>
+                        <option value="12">Dezembro</option>
+                    </select>
+                </div>
+            </div>
+            <div style="display: flex; gap: 10px;">
+                <button type="button" id="fetch-btn" style="flex: 2;">
+                    <i class="fas fa-search"></i> Buscar
+                </button>
+                <button type="button" id="today-btn" style="flex: 1; background: #f1f1f1; color: #666; box-shadow: none;">
+                    <i class="fas fa-calendar-day"></i> Hoje
+                </button>
+            </div>
+        </section>
+
+        <section id="liturgy-content" class="liturgy-card" style="display: none;">
+            <div class="liturgy-header">
+                <h3 id="liturgy-date" style="color: var(--primary-color); margin-bottom: 5px;"></h3>
+                <h4 id="liturgy-title" style="font-weight: 500; font-size: 1rem; color: var(--text-light);"></h4>
+                <span id="liturgy-color" class="liturgy-color"></span>
+            </div>
+
+            <div class="antiphon">
+                <h5 style="color: var(--primary-dark); margin-bottom: 5px;"><i class="fas fa-music"></i> Antífona de Entrada</h5>
+                <p id="antiphon-entrance"></p>
+            </div>
+
+            <div class="form-group">
+                <label>Oração do Dia (Coleta)</label>
+                <div class="prayer-text" id="coleta"></div>
+            </div>
+
+            <div class="form-group">
+                <label>Oração sobre as Oferendas</label>
+                <div class="prayer-text" id="oferendas"></div>
+            </div>
+
+            <div class="form-group" id="primeira-leitura"></div>
+            <div class="form-group psalm" id="salmo"></div>
+            <div class="form-group" id="segunda-leitura"></div>
+            <div class="form-group gospel" id="evangelho"></div>
+
+            <div class="form-group">
+                <label>Oração depois da Comunhão</label>
+                <div class="prayer-text" id="comunhao"></div>
+            </div>
+
+            <div class="antiphon">
+                <h5 style="color: var(--primary-dark); margin-bottom: 5px;"><i class="fas fa-music"></i> Antífona da Comunhão</h5>
+                <p id="antiphon-communion"></p>
+            </div>
+        </section>
+    </main>
+
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+      <a href="../../index.html" class="nav-item">
+        <i class="fas fa-home"></i>
+        <span>Início</span>
+      </a>
+      <a href="../celebracoes/celebracoes.html" class="nav-item">
+        <i class="fas fa-church"></i>
+        <span>Celeb.</span>
+      </a>
+      <div class="nav-item nav-item-center">
+        <a href="./liturgia.html" class="center-btn">
+          <i class="fas fa-bible"></i>
+        </a>
+      </div>
+      <a href="../convivencias/convivencias.html" class="nav-item">
+        <i class="fas fa-users"></i>
+        <span>Conviv.</span>
+      </a>
+      <a href="../ajuda/ajuda.html" class="nav-item">
+        <i class="fas fa-info-circle"></i>
+        <span>Ajuda</span>
+      </a>
+    </nav>
+
+    <script src="../../js/alerts.js"></script>
+    <script src="../../js/liturgia.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const fetchBtn = document.getElementById('fetch-btn');
+            const liturgyContent = document.getElementById('liturgy-content');
+            
+            fetchBtn.addEventListener('click', () => {
+                liturgyContent.style.display = 'block';
+            });
+        });
+    </script>
+</body>
+</html>

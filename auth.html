@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Caminho Nuporanga</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/auth.css">
+    <link rel="icon" type="image/x-icon" href="/img/favicon.png">
+</head>
+<body>
+    <div class="container">
+        <div class="auth-card">
+            <h2>Caminho Nuporanga</h2>
+            <p>Comunidade 5 • Área Restrita</p>
+            <div class="logo">
+                <img src="https://s3-sa-east-1.amazonaws.com/loja2/502253fe6a1b3fa283a422fd46b0d7fb.jpg" alt="Logo">
+            </div>
+            
+            <form id="loginForm" class="login-form">
+                <div class="form-group">
+                    <div class="input-with-icon">
+                        <i class="fas fa-envelope"></i>
+                        <input type="email" id="email" placeholder="Seu e-mail" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="input-with-icon">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="password" placeholder="Sua senha" required>
+                    </div>
+                </div>
+
+                <button type="submit" id="loginButton" class="login-button">
+                    <span id="buttonText">Entrar</span>
+                    <div class="loading" id="loadingSpinner">
+                        <div class="spinner"></div>
+                    </div>
+                </button>
+
+                <div class="error-message" id="errorMessage" style="display: none;">
+                    <i class="fas fa-exclamation-circle"></i>
+                    <span id="errorText"></span>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-auth-compat.js"></script>
+    <script src="./js/alerts.js"></script>
+    
+    <!-- Configuração do Firebase -->
+    <script type="module">
+        import firebaseConfig from './js/firebase-config.js';
+
+        // Inicializar Firebase
+        firebase.initializeApp(firebaseConfig);
+
+        const loginForm = document.getElementById('loginForm');
+        const emailInput = document.getElementById('email');
+        const passwordInput = document.getElementById('password');
+        const loginButton = document.getElementById('loginButton');
+        const buttonText = document.getElementById('buttonText');
+        const loadingSpinner = document.getElementById('loadingSpinner');
+
+        function showLoading() {
+            buttonText.style.display = 'none';
+            loadingSpinner.style.display = 'block';
+            loginButton.disabled = true;
+        }
+
+        function hideLoading() {
+            buttonText.style.display = 'block';
+            loadingSpinner.style.display = 'none';
+            loginButton.disabled = false;
+        }
+
+        // Verificar se usuário já está logado
+        firebase.auth().onAuthStateChanged((user) => {
+            if (user) {
+                window.location.href = 'index.html';
+            }
+        });
+
+        // Manipular envio do formulário
+        loginForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const email = emailInput.value.trim();
+            const password = passwordInput.value.trim();
+
+            if (!email || !password) {
+                Alerts.warning('Campos Vazios', 'Por favor, preencha todos os campos.');
+                return;
+            }
+
+            showLoading();
+            Alerts.toast("Autenticando...", "key");
+
+            try {
+                await firebase.auth().signInWithEmailAndPassword(email, password);
+                Alerts.toast("Acesso permitido!", "check");
+                setTimeout(() => window.location.href = 'index.html', 800);
+                
+            } catch (error) {
+                hideLoading();
+                
+                let msg = 'Erro ao fazer login. Tente novamente.';
+                switch (error.code) {
+                    case 'auth/invalid-email': msg = 'E-mail inválido.'; break;
+                    case 'auth/user-disabled': msg = 'Esta conta foi desativada.'; break;
+                    case 'auth/user-not-found': msg = 'Usuário não encontrado.'; break;
+                    case 'auth/wrong-password': msg = 'Senha incorreta.'; break;
+                    case 'auth/too-many-requests': msg = 'Muitas tentativas. Tente mais tarde.'; break;
+                }
+                Alerts.error('Falha na Autenticação', msg);
+            }
+        });
+    </script>
+</body>
+</html>

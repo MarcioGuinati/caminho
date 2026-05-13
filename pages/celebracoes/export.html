@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caminho</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="icon" type="image/x-icon" href="/img/favicon.png">
+    
+    <!-- Biblioteca para gerar Excel -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+
+    <!-- Bibliotecas para gerar PDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div id="results">
+            <h2 style="text-align: center;"><mark>Celebração</mark></h2>
+            <div class="home">
+                <a href="/index.html"><i class="fas fa-reply"></i> Voltar</a>
+            </div>
+            <div class="logo">
+                <img src="https://s3-sa-east-1.amazonaws.com/loja2/502253fe6a1b3fa283a422fd46b0d7fb.jpg" />
+            </div>
+            <br>
+            <button onclick="exportarParaExcel()"><i class="fas fa-file-excel"></i> Exportar para Excel</button>
+            <br>
+            <br>
+            <button onclick="exportarParaPDF()" class="export-btn pdf-btn">
+                <i class="fas fa-file-pdf"></i> Exportar para PDF
+            </button>
+        </div>
+    </div>
+    <!-- <script src="/js/results.js"></script> -->
+     <script type="module" src="/js/export_exel-celeb.js"></script>
+     <script type="module" src="/js/export_pdf_celeb.js"></script>
+</body>
+</html>

@@ -1,0 +1,212 @@
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #D3CBB8;
+    margin: 50px;
+    padding: 0;
+}
+
+#multiStepForm {
+    max-width: 600px;
+    margin: 20px auto;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo img {
+    width: 300px;
+    height: 300px;
+    border-radius: 80%;
+}
+
+h2{
+    text-align: center;
+}
+
+a {
+    text-decoration: none;
+}
+
+iframe {
+    border: 2px solid #6D6027;
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 50%;
+    margin: 20px auto;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+h2 mark {
+    border-radius: 3px;
+    padding: 5px;
+    background-color: #6D6027;
+    color: #fff;
+  }
+
+.step {
+    display: none;
+}
+
+.step.active {
+    display: block;
+}
+
+h2 {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+}
+hr {
+
+    border: 0;
+    height: 1px;
+    background: #333;
+    background-image: linear-gradient(to right, #ccc, #333, #ccc);
+    margin: 20px 0;
+  }
+
+input[type="text"],
+input[type="number"],
+textarea {
+    font-family: 'Montserrat', sans-serif;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+textarea {
+    resize: none;
+}
+
+/* Inicio Alinhamento type radio */
+.horizontal-group {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px; /* Espaçamento entre os itens */
+  }
+.horizontal-group label {
+    display: flex;
+    align-items: center;
+  }
+
+/* Fim Alinhamento type radio */
+
+
+.button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin-right: 20px;
+}
+
+button {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 18px;
+    padding: 10px 20px;
+    background-color: #6D6027;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 3px;
+
+}
+
+button:hover {
+    opacity: 0.5;
+}
+
+.home a {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 18px;
+    padding: 10px 20px;
+    background-color: #6D6027;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 5px;
+    text-align: center;
+}
+
+.home a:hover {
+    opacity: 0.5;
+}
+
+.home {
+    display: flex;
+    flex-wrap: wrap;  /* Permite que os botões quebrem para uma nova linha se necessário */
+    justify-content: center;  /* Centraliza os botões horizontalmente */
+    align-items: center;  /* Centraliza os botões verticalmente */
+    gap: 10px;  /* Espaço entre os botões */
+    padding: 20px;  /* Distância das bordas */
+}
+
+@media screen and (max-width: 600px) {
+    .home a {
+        font-size: 16px; /* Ajusta o tamanho da fonte em telas menores */
+        padding: 8px 15px; /* Ajusta o padding em telas menores */
+    }
+}
+
+
+.invalid {
+    border: 1px solid red !important; /* Adiciona uma borda vermelha */
+}
+
+.progress-bar {
+    width: 100%;
+    height: 20px;
+    background-color: #f0f0f0;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.progress {
+    height: 100%;
+    background-color: #6D6027;
+    width: 0%;
+}
+
+
+/* Estilo para a tabela */
+#results {
+    width: 80%; /* Define a largura da tabela */
+    margin: 0 auto; /* Centraliza a tabela na horizontal */
+    border-collapse: collapse; /* Une as bordas das células */
+}
+
+/* Estilo para as células do cabeçalho */
+th {
+    padding: 8px;
+    text-align: left;
+    background-color: #f2f2f2; /* Cor de fundo do cabeçalho */
+    border-bottom: 1px solid #ddd; /* Borda inferior das células do cabeçalho */
+}
+
+/* Estilo para as células da tabela */
+td {
+    padding: 8px;
+    border-bottom: 1px solid #ddd; /* Borda inferior das células da tabela */
+}

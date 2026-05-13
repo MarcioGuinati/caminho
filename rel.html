@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Relatórios Gerais • Caminho</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./css/home.css">
+    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="icon" type="image/x-icon" href="/img/favicon.png" />
+    <style>
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+        .stat-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            padding: 20px 15px;
+            border-radius: 20px;
+            text-align: center;
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--shadow-sm);
+        }
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            display: block;
+        }
+        .stat-label {
+            font-size: 0.7rem;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-top: 5px;
+            display: block;
+        }
+        .filters-container {
+            background: white;
+            padding: 25px;
+            border-radius: 24px;
+            box-shadow: var(--shadow-md);
+            margin-bottom: 25px;
+        }
+        .filter-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+        .search-row {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        .search-row input { flex: 1; }
+        
+        @media (max-width: 480px) {
+            .filter-grid { grid-template-columns: 1fr; }
+            .search-row { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+    <!-- App Header -->
+    <header class="app-header">
+      <div class="header-left">
+        <a href="./index.html" class="back-link">
+          <i class="fas fa-arrow-left"></i>
+        </a>
+        <div class="user-profile">
+          <div class="user-info-text">
+            <span class="user-name">Relatórios e Estatísticas</span>
+            <span class="user-role">Gestão Caminho</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="main-container">
+        <!-- Dashboard de Resumo -->
+        <section class="stats-grid">
+            <div class="stat-card">
+                <span class="stat-value" id="total-celeb">0</span>
+                <span class="stat-label">Celebrações</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-value" id="total-conv">0</span>
+                <span class="stat-label">Convivências</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-value" id="total-encon">0</span>
+                <span class="stat-label">Encontros</span>
+            </div>
+            <div class="stat-card" style="background: var(--primary-color);">
+                <span class="stat-value" id="total-geral" style="color: white;">0</span>
+                <span class="stat-label" style="color: rgba(255,255,255,0.7);">Total Geral</span>
+            </div>
+        </section>
+
+        <!-- Filtros Avançados -->
+        <section class="filters-container">
+            <div class="filter-grid">
+                <div class="form-group">
+                    <label>Tipo de Registro</label>
+                    <select id="filter-type">
+                        <option value="todos">Todos os registros</option>
+                        <option value="celebracoes">Celebrações</option>
+                        <option value="convivencias">Convivências</option>
+                        <option value="encontros">Encontros</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Data Inicial</label>
+                    <input type="date" id="filter-start-date">
+                </div>
+                <div class="form-group">
+                    <label>Data Final</label>
+                    <input type="date" id="filter-end-date">
+                </div>
+            </div>
+            <div class="search-row">
+                <input type="text" id="filter-search" placeholder="Buscar por tema, local ou grupo...">
+                <button id="apply-filters" class="form-button" style="width: auto; padding: 0 30px;">
+                    <i class="fas fa-filter"></i> Filtrar
+                </button>
+            </div>
+        </section>
+
+        <!-- Resultados -->
+        <div class="results-container">
+            <div class="pagination-limit">
+                <label>Exibir:</label>
+                <select id="page-limit" style="width: 80px;">
+                    <option value="10">10</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                </select>
+            </div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Registro</th>
+                        <th>Data</th>
+                        <th>Detalhes</th>
+                        <th style="text-align: center;">Ações</th>
+                    </tr>
+                </thead>
+                <tbody id="results-list">
+                    <tr><td colspan="4" style="text-align:center; padding: 40px;">Carregando...</td></tr>
+                </tbody>
+            </table>
+
+            <div id="pagination-container" class="pagination-controls"></div>
+        </div>
+    </main>
+
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+      <a href="./index.html" class="nav-item">
+        <i class="fas fa-home"></i>
+        <span>Início</span>
+      </a>
+      <a href="./pages/celebracoes/celebracoes.html" class="nav-item">
+        <i class="fas fa-church"></i>
+        <span>Celeb.</span>
+      </a>
+      <div class="nav-item nav-item-center">
+        <a href="./pages/liturgia/liturgia.html" class="center-btn">
+          <i class="fas fa-bible"></i>
+        </a>
+      </div>
+      <a href="./pages/convivencias/convivencias.html" class="nav-item">
+        <i class="fas fa-users"></i>
+        <span>Conviv.</span>
+      </a>
+      <a href="./pages/ajuda/ajuda.html" class="nav-item">
+        <i class="fas fa-info-circle"></i>
+        <span>Ajuda</span>
+      </a>
+    </nav>
+
+    <!-- Scripts Modularizados -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-app.js";
+        import { getFirestore, collection, getDocs, doc, getDoc, query, orderBy, where } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-firestore.js";
+        import firebaseConfig from './js/firebase-config.js';
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // Exportar para o escopo global para o script de relatório
+        window.db = db;
+        window.collection = collection;
+        window.getDocs = getDocs;
+        window.query = query;
+        window.orderBy = orderBy;
+        window.where = where;
+        window.getDoc = getDoc;
+        window.doc = doc;
+    </script>
+    <script src="./js/reports.js"></script>
+</body>
+</html>

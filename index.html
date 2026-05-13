@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Caminho • Comunidade 5</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./css/home.css" />
+    <link rel="icon" type="image/x-icon" href="/img/favicon.png" />
+  </head>
+  <body>
+    <!-- App Header -->
+    <header class="app-header">
+      <div class="user-profile">
+        <div class="user-avatar" id="userAvatar">
+          <i class="fas fa-user"></i>
+        </div>
+        <div class="user-info-text">
+          <span class="user-name" id="userDisplayName">Usuário</span>
+          <span class="user-role" id="userEmail">Carregando...</span>
+        </div>
+      </div>
+      <div class="header-actions">
+        <a class="logout-link" id="logoutBtn" title="Sair">
+          <i class="fas fa-right-from-bracket"></i>
+        </a>
+      </div>
+    </header>
+
+    <main class="main-container">
+      <div class="home-logo">
+        <img src="https://s3-sa-east-1.amazonaws.com/loja2/502253fe6a1b3fa283a422fd46b0d7fb.jpg" alt="Logo Caminho" />
+      </div>
+
+      <section class="welcome-section">
+        <h1>Olá, <span id="welcomeName">Bem-vindo</span>!</h1>
+        <p>O que você deseja acessar hoje?</p>
+      </section>
+
+      <div class="dashboard-grid">
+        <a href="./pages/celebracoes/celebracoes.html" class="menu-card">
+          <div class="card-icon"><i class="fas fa-church"></i></div>
+          <span class="card-title">Celebrações</span>
+        </a>
+        
+        <a href="./pages/convivencias/convivencias.html" class="menu-card">
+          <div class="card-icon"><i class="fas fa-users"></i></div>
+          <span class="card-title">Convivências</span>
+        </a>
+        
+        <a href="./pages/encontros/encontros.html" class="menu-card">
+          <div class="card-icon"><i class="fas fa-handshake"></i></div>
+          <span class="card-title">Encontros</span>
+        </a>
+        
+        <a href="./pages/liturgia/liturgia.html" class="menu-card">
+          <div class="card-icon"><i class="fas fa-bible"></i></div>
+          <span class="card-title">Liturgia</span>
+        </a>
+        
+        <a href="./pages/ajuda/ajuda.html" class="menu-card">
+          <div class="card-icon"><i class="fas fa-question-circle"></i></div>
+          <span class="card-title">Ajuda</span>
+        </a>
+
+        <a href="./rel.html" class="menu-card">
+          <div class="card-icon"><i class="fas fa-chart-line"></i></div>
+          <span class="card-title">Relatórios</span>
+        </a>
+      </div>
+    </main>
+
+    <!-- Bottom Navigation Mobile -->
+    <nav class="bottom-nav">
+      <a href="index.html" class="nav-item active">
+        <i class="fas fa-home"></i>
+        <span>Início</span>
+      </a>
+      <a href="./pages/celebracoes/celebracoes.html" class="nav-item">
+        <i class="fas fa-church"></i>
+        <span>Celeb.</span>
+      </a>
+      <div class="nav-item nav-item-center">
+        <a href="./pages/liturgia/liturgia.html" class="center-btn">
+          <i class="fas fa-bible"></i>
+        </a>
+      </div>
+      <a href="./pages/convivencias/convivencias.html" class="nav-item">
+        <i class="fas fa-users"></i>
+        <span>Conviv.</span>
+      </a>
+      <a href="./pages/ajuda/ajuda.html" class="nav-item">
+        <i class="fas fa-info-circle"></i>
+        <span>Ajuda</span>
+      </a>
+    </nav>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-auth-compat.js"></script>
+
+    <!-- Scripts Modularizados -->
+    <script src="./js/alerts.js"></script>
+    <script type="module">
+      import firebaseConfig from './js/firebase-config.js';
+
+      // Inicializar Firebase
+      firebase.initializeApp(firebaseConfig);
+
+      // Elementos
+      const userEmailDisplay = document.getElementById("userEmail");
+      const userDisplayName = document.getElementById("userDisplayName");
+      const welcomeName = document.getElementById("welcomeName");
+      const logoutBtn = document.getElementById("logoutBtn");
+
+      // Logout
+      function logout() {
+        Alerts.confirm("Sair do Sistema", "Deseja realmente sair da sua conta?", () => {
+          Alerts.toast("Saindo...", "right-from-bracket");
+          setTimeout(() => {
+            firebase.auth().signOut().then(() => {
+              window.location.href = "auth.html";
+            }).catch((error) => {
+              console.error("Erro logout:", error);
+              Alerts.error("Erro ao sair", "Tente novamente mais tarde.");
+            });
+          }, 800);
+        });
+      }
+
+      logoutBtn.addEventListener("click", logout);
+
+      // Auth State
+      firebase.auth().onAuthStateChanged((user) => {
+        if (!user) {
+          window.location.href = "auth.html";
+        } else {
+          const email = user.email;
+          const name = email ? email.split('@')[0] : "Usuário";
+          
+          userEmailDisplay.textContent = email;
+          userDisplayName.textContent = name.charAt(0).toUpperCase() + name.slice(1);
+          welcomeName.textContent = name.charAt(0).toUpperCase() + name.slice(1);
+
+          // Iniciais no Avatar
+          const avatar = document.getElementById("userAvatar");
+          avatar.innerHTML = `<span>${name.charAt(0).toUpperCase()}</span>`;
+        }
+      });
+
+      // ESC para Sair
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") logout();
+      });
+    </script>
+  </body>
+</html>

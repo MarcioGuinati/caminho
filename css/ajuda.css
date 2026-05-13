@@ -1,0 +1,91 @@
+/* Ajuda Styles - Caminho Premium */
+.guide-container {
+  background: white;
+  padding: 40px 30px;
+  border-radius: 32px;
+  box-shadow: var(--shadow-lg);
+  margin-bottom: 30px;
+  animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.guide-section {
+  margin-bottom: 35px;
+  padding-bottom: 25px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.guide-section:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+}
+
+.guide-section h2 {
+  color: var(--primary-color);
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.guide-section h2 i {
+  color: var(--primary-light);
+  font-size: 1.2rem;
+}
+
+.guide-section p {
+  color: var(--text-color);
+  line-height: 1.8;
+  font-size: 1.05rem;
+  margin-bottom: 15px;
+}
+
+.guide-section ul {
+  list-style: none;
+  padding: 0;
+}
+
+.guide-section ul li {
+  position: relative;
+  padding-left: 28px;
+  margin-bottom: 14px;
+  color: var(--text-color);
+  line-height: 1.6;
+  font-size: 1rem;
+}
+
+.guide-section ul li::before {
+  content: '\f058';
+  font-family: 'Font Awesome 6 Free';
+  font-weight: 900;
+  position: absolute;
+  left: 0;
+  color: var(--primary-light);
+  font-size: 1.1rem;
+}
+
+.guide-section strong {
+  color: var(--primary-dark);
+  font-weight: 700;
+}
+
+/* Specific Cards for Content */
+.content-card {
+  background: var(--bg-color);
+  padding: 20px;
+  border-radius: 20px;
+  margin-top: 15px;
+  border-left: 5px solid var(--primary-color);
+}
+
+@media (max-width: 480px) {
+  .guide-container {
+    padding: 30px 20px;
+    border-radius: 24px;
+  }
+  
+  .guide-section h2 {
+    font-size: 1.25rem;
+  }
+}
