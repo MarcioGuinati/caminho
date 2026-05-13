@@ -15,41 +15,56 @@
     <link rel="apple-touch-icon" href="./img/icon-192.png" />
 </head>
 <body>
-    <div class="container">
-        <div class="auth-card">
-            <h2>Caminho Nuporanga</h2>
-            <p>Comunidade 5 • Área Restrita</p>
-            <div class="logo">
-                <img src="https://s3-sa-east-1.amazonaws.com/loja2/502253fe6a1b3fa283a422fd46b0d7fb.jpg" alt="Logo">
+    <div class="auth-wrapper">
+        <div class="auth-split-left">
+            <div class="auth-welcome-content">
+                <div class="logo-floating">
+                    <img src="https://s3-sa-east-1.amazonaws.com/loja2/502253fe6a1b3fa283a422fd46b0d7fb.jpg" alt="Logo">
+                </div>
+                <h1>Bem-vindo ao <br><span>Caminho Nuporanga</span></h1>
+                <p>Acesse sua conta para gerenciar as atividades da Comunidade 4 com eficiência e fé.</p>
+                <div class="welcome-footer">
+                    <div class="stat-item">
+                        <span class="stat-val">Comunidade</span>
+                        <span class="stat-label">4</span>
+                    </div>
+                </div>
             </div>
-            
-            <form id="loginForm" class="login-form">
-                <div class="form-group">
-                    <div class="input-with-icon">
-                        <i class="fas fa-envelope"></i>
-                        <input type="email" id="email" placeholder="Seu e-mail" required>
-                    </div>
+        </div>
+        <div class="auth-split-right">
+            <div class="auth-form-card">
+                <div class="mobile-logo">
+                    <img src="https://s3-sa-east-1.amazonaws.com/loja2/502253fe6a1b3fa283a422fd46b0d7fb.jpg" alt="Logo">
                 </div>
-
-                <div class="form-group">
-                    <div class="input-with-icon">
-                        <i class="fas fa-lock"></i>
-                        <input type="password" id="password" placeholder="Sua senha" required>
+                <h2>Iniciar Sessão</h2>
+                <p>Por favor, insira suas credenciais abaixo</p>
+                
+                <form id="loginForm" class="login-form">
+                    <div class="form-group">
+                        <label for="email">E-mail de Acesso</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-envelope"></i>
+                            <input type="email" id="email" placeholder="exemplo@email.com" required>
+                        </div>
                     </div>
-                </div>
-
-                <button type="submit" id="loginButton" class="login-button">
-                    <span id="buttonText">Entrar</span>
-                    <div class="loading" id="loadingSpinner">
-                        <div class="spinner"></div>
+    
+                    <div class="form-group">
+                        <label for="password">Sua Senha</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" id="password" placeholder="••••••••" required>
+                        </div>
                     </div>
-                </button>
-
-                <div class="error-message" id="errorMessage" style="display: none;">
-                    <i class="fas fa-exclamation-circle"></i>
-                    <span id="errorText"></span>
-                </div>
-            </form>
+    
+                    <button type="submit" id="loginButton" class="login-button">
+                        <span id="buttonText">Entrar no Sistema</span>
+                        <div class="loading" id="loadingSpinner">
+                            <div class="spinner"></div>
+                            <span>Autenticando...</span>
+                        </div>
+                    </button>
+                </form>
+            </div>
         </div>
     </div>
 
@@ -74,7 +89,7 @@
 
         function showLoading() {
             buttonText.style.display = 'none';
-            loadingSpinner.style.display = 'block';
+            loadingSpinner.style.display = 'flex';
             loginButton.disabled = true;
         }
 
@@ -104,7 +119,6 @@
             }
 
             showLoading();
-            Alerts.toast("Autenticando...", "key");
 
             try {
                 await firebase.auth().signInWithEmailAndPassword(email, password);
