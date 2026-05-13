@@ -1,0 +1,24 @@
+{
+  "name": "Caminho Comunidade 5",
+  "short_name": "Caminho",
+  "description": "Sistema de gestão e planejamento para a Comunidade 5",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#f0f2f5",
+  "theme_color": "#603813",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "img/icon-192.png",
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "img/icon-512.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "any maskable"
+    }
+  ]
+}
