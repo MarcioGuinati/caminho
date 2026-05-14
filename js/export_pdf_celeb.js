@@ -2,13 +2,13 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.1/fireba
 import { getFirestore, collection, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-firestore.js";
 
 const firebaseConfig = {
-    apiKey: "AIzaSyCFu1Y1ml9bB-Fna6859_RfXTF7bbPvP1U",
-    authDomain: "caminho-comunidade6.firebaseapp.com",
-    projectId: "caminho-comunidade6",
-    storageBucket: "caminho-comunidade6.firebasestorage.app",
-    messagingSenderId: "723550846433",
-    appId: "1:723550846433:web:1fb390b81cd3e132a026a0",
-    measurementId: "G-EHV4MC98BE"
+    apiKey: "AIzaSyCQrsuTuqXowmnl2JWse0balVQChUHvjBg",
+    authDomain: "igreja-747c5.firebaseapp.com",
+    projectId: "igreja-747c5",
+    storageBucket: "igreja-747c5.firebasestorage.app",
+    messagingSenderId: "909549397062",
+    appId: "1:909549397062:web:f99c36435c54b970299647",
+    measurementId: "G-WF0ZL1TWW2"
 };
 
 // Inicializa Firebase

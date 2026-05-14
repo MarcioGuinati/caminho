@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Caminho</title>
-    <link rel="stylesheet" href="/css/style.css">
-    <link rel="icon" type="image/x-icon" href="/img/favicon.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Exportar Celebrações • Caminho</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../css/home.css">
+    <link rel="icon" type="image/x-icon" href="../../img/favicon.png">
     
     <!-- Biblioteca para gerar Excel -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
@@ -14,28 +15,97 @@
     <!-- Bibliotecas para gerar PDF -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
+    
+    <style>
+        .export-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        .export-card {
+            cursor: pointer;
+            border: none;
+            width: 100%;
+            height: auto;
+            background: white;
+        }
+        .export-card:active {
+            transform: scale(0.98);
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <div id="results">
-            <h2 style="text-align: center;"><mark>Celebração</mark></h2>
-            <div class="home">
-                <a href="/index.html"><i class="fas fa-reply"></i> Voltar</a>
-            </div>
-            <div class="logo">
-                <img src="https://s3-sa-east-1.amazonaws.com/loja2/502253fe6a1b3fa283a422fd46b0d7fb.jpg" />
-            </div>
-            <br>
-            <button onclick="exportarParaExcel()"><i class="fas fa-file-excel"></i> Exportar para Excel</button>
-            <br>
-            <br>
-            <button onclick="exportarParaPDF()" class="export-btn pdf-btn">
-                <i class="fas fa-file-pdf"></i> Exportar para PDF
-            </button>
+    <!-- App Header -->
+    <header class="app-header">
+      <div class="header-left">
+        <a href="./celebracoes.html" class="back-link">
+          <i class="fas fa-arrow-left"></i>
+        </a>
+        <div class="user-profile">
+          <div class="user-info-text">
+            <span class="user-name">Exportar Dados</span>
+            <span class="user-role">Celebrações</span>
+          </div>
         </div>
-    </div>
-    <!-- <script src="/js/results.js"></script> -->
-     <script type="module" src="/js/export_exel-celeb.js"></script>
-     <script type="module" src="/js/export_pdf_celeb.js"></script>
+      </div>
+    </header>
+
+    <main class="main-container">
+      <div class="home-logo">
+        <img src="https://s3-sa-east-1.amazonaws.com/loja2/502253fe6a1b3fa283a422fd46b0d7fb.jpg" alt="Logo" />
+      </div>
+
+      <section class="welcome-section">
+        <h1>Exportar Celebrações</h1>
+        <p>Escolha o formato do arquivo para download</p>
+      </section>
+
+      <div class="export-grid">
+        <button class="menu-card export-card" onclick="exportarParaExcel()">
+          <div class="card-icon" style="background: rgba(46, 125, 50, 0.1); color: #2e7d32;">
+            <i class="fas fa-file-excel"></i>
+          </div>
+          <span class="card-title">Exportar para Excel</span>
+          <p style="font-size: 0.8rem; color: var(--text-light); margin-top: -10px;">Formato .xlsx para planilhas</p>
+        </button>
+        
+        <button class="menu-card export-card" onclick="exportarParaPDF()">
+          <div class="card-icon" style="background: rgba(198, 40, 40, 0.1); color: #c62828;">
+            <i class="fas fa-file-pdf"></i>
+          </div>
+          <span class="card-title">Exportar para PDF</span>
+          <p style="font-size: 0.8rem; color: var(--text-light); margin-top: -10px;">Documento pronto para impressão</p>
+        </button>
+      </div>
+    </main>
+
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+      <a href="../../index.html" class="nav-item">
+        <i class="fas fa-home"></i>
+        <span>Início</span>
+      </a>
+      <a href="./celebracoes.html" class="nav-item active">
+        <i class="fas fa-church"></i>
+        <span>Celeb.</span>
+      </a>
+      <div class="nav-item nav-item-center">
+        <a href="../liturgia/liturgia.html" class="center-btn">
+          <i class="fas fa-bible"></i>
+        </a>
+      </div>
+      <a href="../convivencias/convivencias.html" class="nav-item">
+        <i class="fas fa-users"></i>
+        <span>Conviv.</span>
+      </a>
+      <a href="../ajuda/ajuda.html" class="nav-item">
+        <i class="fas fa-info-circle"></i>
+        <span>Ajuda</span>
+      </a>
+    </nav>
+
+    <script type="module" src="../../js/export_exel-celeb.js"></script>
+    <script type="module" src="../../js/export_pdf_celeb.js"></script>
 </body>
 </html>
